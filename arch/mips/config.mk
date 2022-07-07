@@ -13,7 +13,7 @@ KBUILD_LDFLAGS		+= -EB
 endif
 
 ifdef CONFIG_SYS_LITTLE_ENDIAN
-32bit-emul		:= elf32ltsmip
+32bit-emul		:= elf32elmip
 64bit-emul		:= elf64ltsmip
 32bit-bfd		:= elf32-tradlittlemips
 64bit-bfd		:= elf64-tradlittlemips

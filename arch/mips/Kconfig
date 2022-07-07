@@ -12,6 +12,18 @@ choice
 	prompt "Target select"
 	optional
 
+config TARGET_PP
+  bool "Support pp"
+    select OF_CONTROL
+	select DM
+	select DM_SERIAL
+	select DM_ETH
+    select SYS_NS16550
+	select SUPPORTS_LITTLE_ENDIAN
+	select SUPPORTS_CPU_MIPS32_R1
+	select SKIP_LOWLEVEL_INIT
+	help
+	  WHU nscscc 2022 Programmers' Perspective
 config TARGET_MALTA
 	bool "Support malta"
 	select BOARD_EARLY_INIT_R
@@ -177,6 +189,7 @@ source "arch/mips/mach-jz47xx/Kconfig"
 source "arch/mips/mach-pic32/Kconfig"
 source "arch/mips/mach-mtmips/Kconfig"
 source "arch/mips/mach-octeon/Kconfig"
+source "arch/mips/mach-pp/Kconfig"
 
 if MIPS
 

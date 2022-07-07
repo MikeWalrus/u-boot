@@ -149,7 +149,6 @@ static int display_text_info(void)
 #else
 	text_base = CONFIG_SYS_MONITOR_BASE;
 #endif
-
 	debug("U-Boot code: %08lX -> %08lX  BSS: -> %08lX\n",
 	      text_base, bss_start, bss_end);
 #endif

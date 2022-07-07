@@ -33,6 +33,9 @@ arch-$(CONFIG_CPU_MIPS64_R2) += -march=mips64r2 -Wa,-mips64r2
 arch-$(CONFIG_CPU_MIPS64_R6) += -march=mips64r6 -Wa,-mips64r6
 arch-${CONFIG_CPU_MIPS64_OCTEON} += -march=octeon2
 
+arch-${CONFIG_TARGET_PP} += -mno-branch-likely \
+	-mno-llsc -mno-mad -mno-imadd -mdivide-breaks
+
 # Allow extra optimization for specific CPUs/SoCs
 tune-$(CONFIG_MIPS_TUNE_4KC) += -mtune=4kc
 tune-$(CONFIG_MIPS_TUNE_14KC) += -mtune=14kc

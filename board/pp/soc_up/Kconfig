@@ -1,0 +1,25 @@
+if SOC_UP_PP
+
+config SYS_BOARD
+  default "soc_up"
+
+config SYS_CONFIG_NAME
+  default "soc_up"
+
+config SYS_VENDOR
+  default "pp"
+
+config SYS_TEXT_BASE
+  default 0xbfc00000
+
+config SYS_LOAD_ADDR
+  default 0xbfc00000
+
+config SYS_MONITOR_BASE
+  default 0xbfc00000
+
+config DEFAULT_DEVICE_TREE
+  string
+  default "soc_up"
+
+endif

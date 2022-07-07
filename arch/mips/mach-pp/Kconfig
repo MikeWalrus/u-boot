@@ -1,0 +1,14 @@
+menu "PP platforms"
+  depends on TARGET_PP
+
+choice
+  prompt "PP SoC select"
+
+config SOC_UP_PP
+  bool "soc_up from nscscc2022_group_v0.01"
+
+endchoice
+
+source "board/pp/soc_up/Kconfig"
+
+endmenu

@@ -1,0 +1,74 @@
+/dts-v1/;
+
+/ {
+
+    #address-cells= <1>;
+    #size-cells = <1>;
+
+    compatible = "pp,soc_up";
+
+    memory@80000000 {
+        device_type = "memory";
+        reg = <0x0 0x8000000>;
+    };
+
+    cpus {
+
+        #address-cells= <1>;
+        #size-cells = <0>;
+
+        cpu@0 {
+            device_type="cpu";
+            compatible = "mips,4Kc";
+            clock-frequency = <&cpu_clk>;
+            reg = <0>;
+          };
+      };
+
+    cpuintc: interrupt-controller {
+        #address-cells = <0>;
+        #interrupt-cells = <1>;
+        interrupt-controller;
+        compatible = "mti,cpu-interrupt-controller";
+     };
+
+    cpu_clk: cpu_clk {
+        compatible = "fixed-clock";
+        #clock-cells = <0>;
+        clock-frequency = <33000000>;
+      };
+
+    sys_clk: sys_clk {
+        compatible = "fixed-clock";
+        clock-frequency = <100000000>;
+    };
+
+    spi_flash@bfe40000 {
+        compatible = "xlnx,xps-spi-2.00.a";
+        reg = <0xbfe40000 0x10000>;
+        interrupt-parent = <&cpuintc>;
+        interrupts = <4>;
+        clock-frequency = <&sys_clk>;
+      };
+
+    ethernet@bff00000 {
+        compatible = "xlnx,xps-ethernetlite-3.00.a";
+        reg = <0xbff00000 0x10000>;
+        interrupt-parent = <&cpuintc>;
+        interrupts = <2>;
+        clock-frequency = <&sys_clk>;
+      };
+
+    serial: serial@bfe40000 {
+        compatible = "ns16550a";
+        reg = <0xbfe40000 0x4000>;
+        interrupt-parent = <&cpuintc>;
+        interrupts = <3>;
+        clock-frequency = <&sys_clk>;
+        current-speed = <115200>;
+    };
+
+    aliases {
+        console = &serial;
+    };
+};
