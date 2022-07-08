@@ -19,6 +19,7 @@ config TARGET_PP
 	select DM_SERIAL
 	select DM_ETH
     select SYS_NS16550
+  select XILINX_EMACLITE
 	select SUPPORTS_LITTLE_ENDIAN
 	select SUPPORTS_CPU_MIPS32_R1
 	select SKIP_LOWLEVEL_INIT

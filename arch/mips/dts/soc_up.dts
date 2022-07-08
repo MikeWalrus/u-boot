@@ -52,11 +52,15 @@
       };
 
     ethernet@bff00000 {
-        compatible = "xlnx,xps-ethernetlite-3.00.a";
+        compatible = "xlnx,xps-ethernetlite-1.00.a";
         reg = <0xbff00000 0x10000>;
         interrupt-parent = <&cpuintc>;
         interrupts = <2>;
         clock-frequency = <&sys_clk>;
+        address-bits = <48>;
+        local-mac-address = [ 02 04 08 16 32 64 ];
+        mac-address = [ 64 32 16 08 04 02 ];
+        max-frame-size = <1518>;
       };
 
     serial: serial@bfe40000 {
