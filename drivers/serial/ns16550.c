@@ -251,15 +251,19 @@ void ns16550_init(struct ns16550 *com_port, int baud_divisor)
 	while (!(serial_in(&com_port->lsr) & UART_LSR_TEMT))
 		;
 
-	serial_out(CONFIG_SYS_NS16550_IER, &com_port->ier);
+	//serial_out(CONFIG_SYS_NS16550_IER, &com_port->ier);
+	serial_out(0, &com_port->ier);
 #if defined(CONFIG_ARCH_OMAP2PLUS) || defined(CONFIG_OMAP_SERIAL)
 	serial_out(0x7, &com_port->mdr1);	/* mode select reset TL16C750*/
 #endif
 
-	serial_out(UART_MCRVAL, &com_port->mcr);
-	serial_out(ns16550_getfcr(com_port), &com_port->fcr);
+	//serial_out(UART_MCRVAL, &com_port->mcr);
+	serial_out(0b11, &com_port->mcr);
+	//serial_out(ns16550_getfcr(com_port), &com_port->fcr);
+	serial_out(0b01000111, &com_port->fcr);
 	/* initialize serial config to 8N1 before writing baudrate */
-	serial_out(UART_LCRVAL, &com_port->lcr);
+	//serial_out(UART_LCRVAL, &com_port->lcr);
+	serial_out(0x03, &com_port->lcr);
 	if (baud_divisor != -1)
 		ns16550_setbrg(com_port, baud_divisor);
 #if defined(CONFIG_ARCH_OMAP2PLUS) || defined(CONFIG_SOC_DA8XX) || \
@@ -422,7 +426,8 @@ static int ns16550_serial_setbrg(struct udevice *dev, int baudrate)
 	struct ns16550_plat *plat = com_port->plat;
 	int clock_divisor;
 
-	clock_divisor = ns16550_calc_divisor(com_port, plat->clock, baudrate);
+	/* clock_divisor = ns16550_calc_divisor(com_port, plat->clock, baudrate); */
+	clock_divisor = ns16550_calc_divisor(com_port, 33000000, baudrate);
 
 	ns16550_setbrg(com_port, clock_divisor);
 
