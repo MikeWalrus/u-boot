@@ -20,7 +20,7 @@
         cpu@0 {
             device_type="cpu";
             compatible = "mips,4Kc";
-            clock-frequency = <&cpu_clk>;
+            clock-frequency = <33000000>;
             reg = <0>;
           };
       };
@@ -32,24 +32,12 @@
         compatible = "mti,cpu-interrupt-controller";
      };
 
-    cpu_clk: cpu_clk {
-        compatible = "fixed-clock";
-        #clock-cells = <0>;
-        clock-frequency = <33000000>;
-      };
-
-    sys_clk: sys_clk {
-        compatible = "fixed-clock";
-        #clock-cells = <0>;
-        clock-frequency = <100000000>;
-    };
-
     spi_flash@bfe40000 {
         compatible = "xlnx,xps-spi-2.00.a";
         reg = <0xbfe40000 0x10000>;
         interrupt-parent = <&cpuintc>;
         interrupts = <4>;
-        clock-frequency = <&cpu_clk>;
+        clock-frequency = <33000000>;
       };
 
     ethernet@bff00000 {
@@ -61,7 +49,7 @@
         local-mac-address = [ 02 04 08 16 32 64 ];
         mac-address = [ 64 32 16 08 04 02 ];
         max-frame-size = <1518>;
-        clock-frequency = <&cpu_clk>;
+        clock-frequency = <33000000>;
       };
 
     serial: serial@bfe40000 {
@@ -69,7 +57,7 @@
         reg = <0xbfe40000 0x4000>;
         interrupt-parent = <&cpuintc>;
         interrupts = <3>;
-        clock-frequency = <&cpu_clk>;
+        clock-frequency = <33000000>;
         current-speed = <115200>;
     };
 
