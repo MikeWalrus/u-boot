@@ -41,24 +41,21 @@
       };
 
     ethernet@bff00000 {
-        compatible = "xlnx,xps-ethernetlite-1.00.a";
+        compatible = "xlnx,axi-ethernetlite-3.0", "xlnx,xps-ethernetlite-1.00.a";
+        local-mac-address = [00 0a 35 00 00 00];
         reg = <0xbff00000 0x10000>;
-        interrupt-parent = <&cpuintc>;
-        interrupts = <2>;
-        address-bits = <48>;
-        local-mac-address = [ 02 04 08 16 32 64 ];
-        mac-address = [ 64 32 16 08 04 02 ];
-        max-frame-size = <1518>;
-        clock-frequency = <33000000>;
-      };
+        xlnx,rx-ping-pong = <0x1>;
+        xlnx,tx-ping-pong = <0x1>;
+    } ;
 
-    serial: serial@bfe40000 {
+    serial: serial@bfe41000 {
         compatible = "ns16550a";
-        reg = <0xbfe40000 0x4000>;
+        reg = <0xbfe41000 0x9000>;
+        reg-shift = <2>;
         interrupt-parent = <&cpuintc>;
         interrupts = <3>;
-        clock-frequency = <33000000>;
-        current-speed = <115200>;
+        clock-frequency = <100000000>;
+        current-speed = <230400>;
     };
 
     aliases {
